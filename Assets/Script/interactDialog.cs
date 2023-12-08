@@ -5,12 +5,12 @@ using TMPro;
 
 public class interactDialog : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI textDialogue;
+    [SerializeField] private GameObject btnDialogue;
     private void OnTriggerEnter2D(Collider2D colider)
     {
         if (colider.CompareTag("Player"))
         {
-            textDialogue.gameObject.SetActive(true);
+            btnDialogue.gameObject.SetActive(true);
         }
     }
 
@@ -18,7 +18,7 @@ public class interactDialog : MonoBehaviour
     {
         if (colider.CompareTag("Player"))
         {
-            textDialogue.gameObject.SetActive(false);
+            btnDialogue.gameObject.SetActive(false);
         }
     }
 
