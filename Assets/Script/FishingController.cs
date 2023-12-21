@@ -7,13 +7,19 @@ using UnityEngine.UI;
 public class FishingController : MonoBehaviour
 {
     public TextMeshProUGUI fishingText;
+    public GameObject panelIkan;
     public Image FishImage;
     public TextMeshProUGUI FishName;
 
     public FishData[] fishDataArray;
+    
 
     private bool isFishing;
-    
+
+    void Start()
+    {
+        
+    }
 
     void Update()
     {
@@ -21,7 +27,10 @@ public class FishingController : MonoBehaviour
         {
             StartCoroutine(FishingCoroutine());
         }
+
+        
     }
+    
 
     private IEnumerator FishingCoroutine()
     {
@@ -68,9 +77,12 @@ public class FishingController : MonoBehaviour
         Debug.Log("Mendapatkan: " + fishData.fishName);
 
         //showIkan
-        //FishImage.gameObject.SetActive(true);
-        
+        panelIkan.gameObject.SetActive(true);
+        FishName.text = fishData.fishName;
+        FishImage.sprite = fishData.fishSprite;
 
+        
+        
         // Misalnya, tampilkan gambar pada UI Canvas
         // fishImage.sprite = fishData.fishSprite;
         // fishNameText.text = fishData.fishName;
@@ -92,7 +104,14 @@ public class FishingController : MonoBehaviour
 
         // Setelah melakukan logika ambil ikan, kembalikan ke kondisi awal
         isFishing = false;
-        fishingText.text = string.Empty;
+
+        panelIkan.gameObject.SetActive(false);
         // Sembunyikan UI informasi ikan, atur sesuai kebutuhan Anda.
+
+        // Simpan ikan ke dalam inventori
+        //SaveToInventory(caughtFish);
+        
     }
+
+   
 }
