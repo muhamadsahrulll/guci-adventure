@@ -544,10 +544,10 @@ RectTransform:
   m_Father: {fileID: 1432316426}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 256, y: 202}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchorMin: {x: 0.661, y: 0.86}
+  m_AnchorMax: {x: 0.804, y: 0.91800004}
+  m_AnchoredPosition: {x: 0.5, y: 1}
+  m_SizeDelta: {x: 1, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &244408623
 MonoBehaviour:
@@ -1065,10 +1065,10 @@ RectTransform:
   m_Father: {fileID: 1432316426}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 70, y: -70}
-  m_SizeDelta: {x: 160, y: 54.7088}
+  m_AnchorMin: {x: 0.49100003, y: 0.31300002}
+  m_AnchorMax: {x: 0.63600004, y: 0.42000002}
+  m_AnchoredPosition: {x: 0, y: -1}
+  m_SizeDelta: {x: 0, y: -1.2911987}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &545448782
 GameObject:
@@ -4233,10 +4233,10 @@ RectTransform:
   m_Father: {fileID: 1432316426}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 420, y: 29.2544}
-  m_SizeDelta: {x: 160, y: 54.7088}
+  m_AnchorMin: {x: 0.8112661, y: 0.5115607}
+  m_AnchorMax: {x: 0.95572484, y: 0.60200006}
+  m_AnchoredPosition: {x: -2, y: -0.24559975}
+  m_SizeDelta: {x: 2, y: 7.7088013}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1720381941
 GameObject:
@@ -4384,6 +4384,7 @@ GameObject:
   - component: {fileID: 1779164450}
   - component: {fileID: 1779164449}
   - component: {fileID: 1779164448}
+  - component: {fileID: 1779164451}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4457,6 +4458,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1779164451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1779164447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e266dfe1e63527749ab79108382af6ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1630949214}
+  smoothSpeed: 0.125
 --- !u!1 &1808533115
 GameObject:
   m_ObjectHideFlags: 0

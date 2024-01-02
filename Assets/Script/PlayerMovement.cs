@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private BoxCollider2D coll;
 
-    private enum MovementState { idle, walk}
+    private enum MovementState { idle, walk }
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +36,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
-        body.velocity = axisMovement.normalized * speed;
+        Vector2 velocity = axisMovement.normalized * speed;
+        body.velocity = velocity;
+
         flipping();
     }
 
@@ -61,12 +63,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (movingLeft)
         {
-            transform.localScale = new Vector3(-1f, transform.localScale.y);
+            transform.localScale = new Vector3(-1f, transform.localScale.y, 1f);
         }
-
         else if (movingRight)
         {
-            transform.localScale = new Vector3(1f, transform.localScale.y);
+            transform.localScale = new Vector3(1f, transform.localScale.y, 1f);
         }
     }
 }
