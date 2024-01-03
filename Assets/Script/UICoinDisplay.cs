@@ -31,6 +31,11 @@ public class UICoinDisplay : MonoBehaviour
         UpdateCoinUI();
     }
 
+    private void Update()
+    {
+        UpdateCoinUI();
+    }
+
     private void UpdateCoinUI()
     {
         if (coinText != null && playerData != null)

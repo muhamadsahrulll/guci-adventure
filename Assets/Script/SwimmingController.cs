@@ -11,6 +11,9 @@ public class SwimmingController : MonoBehaviour
     public TextMeshProUGUI swimmingText;
     public GameObject popUpBerendam;
 
+    public PlayerData playerData;
+    public UICoinDisplay coindisplay;
+
     private bool isSwimming = false;
     private float swimDuration = 30f;
     private float currentSwimTime;
@@ -26,9 +29,15 @@ public class SwimmingController : MonoBehaviour
 
     public void StartBerendam()
     {
-        if (!isSwimming)
+        if (!isSwimming && playerData.coins >= 10)
         {
+            playerData.coins -= 10; // Mengurangkan koin saat berenang
+            PlayerPrefs.SetInt("PlayerCoins", playerData.coins);
             StartSwimming();
+        }
+        else
+        {
+            Debug.Log("Koin tidak cukup");
         }
     }
 
@@ -68,6 +77,7 @@ public class SwimmingController : MonoBehaviour
 
         // Mulai countdown
         InvokeRepeating("UpdateCountdownText", 0f, 1f);
+        
     }
 
     void EndSwimming()
