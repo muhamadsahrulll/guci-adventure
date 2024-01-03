@@ -8,4 +8,5 @@ public class FishData : ScriptableObject
     public string fishName;
     public Sprite fishSprite;
     public float chancePercentage;
+    public int rewardCoins; // Properti untuk menyimpan jumlah koin yang diberikan
 }

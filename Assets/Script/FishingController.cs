@@ -10,9 +10,11 @@ public class FishingController : MonoBehaviour
     public GameObject panelIkan;
     public Image FishImage;
     public TextMeshProUGUI FishName;
+    public TextMeshProUGUI rewardInfo;
 
     public FishData[] fishDataArray;
-    
+    public PlayerData playerData;
+
 
     private bool isFishing;
 
@@ -30,10 +32,11 @@ public class FishingController : MonoBehaviour
 
         
     }
-    
+
 
     private IEnumerator FishingCoroutine()
     {
+        
         fishingText.gameObject.SetActive(true);
         fishingText.text = "Sedang Memancing....";
         yield return new WaitForSeconds(2f);
@@ -41,7 +44,7 @@ public class FishingController : MonoBehaviour
         FishData caughtFish = GetRandomFish();
         DisplayCaughtFish(caughtFish);
 
-        // Lakukan logika lain jika diperlukan
+        playerData.AddCoins(caughtFish.rewardCoins); // Menambah koin sesuai reward ikan
 
         fishingText.text = string.Empty;
         isFishing = false;
@@ -82,7 +85,11 @@ public class FishingController : MonoBehaviour
         FishImage.sprite = fishData.fishSprite;
 
         
-        
+
+        // Memperbarui UI Text jumlah koin
+        rewardInfo.text = "Dapat " + fishData.rewardCoins;
+        Debug.Log(rewardInfo.text = "Dapat coin" + fishData.rewardCoins);
+
         // Misalnya, tampilkan gambar pada UI Canvas
         // fishImage.sprite = fishData.fishSprite;
         // fishNameText.text = fishData.fishName;
@@ -90,10 +97,16 @@ public class FishingController : MonoBehaviour
 
     public void StartFishing()
     {
-        if (!isFishing)
+        if (!isFishing && playerData.coins >= 10)
         {
+            playerData.coins -= 10; // Mengurangkan koin saat memancing
+            PlayerPrefs.SetInt("PlayerCoins", playerData.coins);
             isFishing = true;
             StartCoroutine(FishingCoroutine());
+        }
+        else
+        {
+            Debug.Log("Koin tidak cukup");
         }
     }
 

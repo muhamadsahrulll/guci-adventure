@@ -15,3 +15,4 @@ MonoBehaviour:
   fishName: Ikan Nemo
   fishSprite: {fileID: 21300000, guid: bc793db688f244e4eb4cbf55d5585433, type: 3}
   chancePercentage: 30
+  rewardCoins: 70
