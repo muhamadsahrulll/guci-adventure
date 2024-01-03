@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishName: Ikan Koi
   fishSprite: {fileID: 21300000, guid: 319292e4bb508e041915e179c8e9585c, type: 3}
-  chancePercentage: 50
+  chancePercentage: 30

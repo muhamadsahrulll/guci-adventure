@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc09518d5df6a9842aed1dabc5e3fdea, type: 3}
-  m_Name: item1
+  m_Script: {fileID: 11500000, guid: a8fd720dadc4fe84582fddc8f8917960, type: 3}
+  m_Name: ikan4
   m_EditorClassIdentifier: 
-  itemName: ikan 1
-  itemImage: {fileID: 21300000, guid: 319292e4bb508e041915e179c8e9585c, type: 3}
-  itemCount: 1
+  fishName: Ikan Bandeng
+  fishSprite: {fileID: 21300000, guid: 9ccb14065766b614c9afe880a3fb81a1, type: 3}
+  chancePercentage: 50
