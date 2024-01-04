@@ -25,10 +25,7 @@ public class FishingController : MonoBehaviour
 
     void Update()
     {
-        if (isFishing && Input.GetKeyDown(KeyCode.Space))
-        {
-            StartCoroutine(FishingCoroutine());
-        }
+        
 
         
     }
