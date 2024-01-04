@@ -14,13 +14,14 @@ public class FishingController : MonoBehaviour
 
     public FishData[] fishDataArray;
     public PlayerData playerData;
+    public MissionManager missionManager;
 
 
     private bool isFishing;
 
     void Start()
     {
-        
+        RestoreMissionStatus();
     }
 
     void Update()
@@ -28,6 +29,23 @@ public class FishingController : MonoBehaviour
         
 
         
+    }
+
+    private void RestoreMissionStatus()
+    {
+        int isMissionCompleted = PlayerPrefs.GetInt("IsMissionCompleted", 0);
+        if (isMissionCompleted == 1)
+        {
+            missionManager.OnMissionCompleted?.Invoke("Koi");
+            if (missionManager.IsMisiKoiCompleted())
+            {
+                Debug.Log("Berhasil mendapatkan ikan Koi (di awal game)");
+            }
+        }
+        else
+        {
+            Debug.Log("Misi ikan Koi belum berhasil");
+        }
     }
 
 
@@ -42,6 +60,9 @@ public class FishingController : MonoBehaviour
         DisplayCaughtFish(caughtFish);
 
         playerData.AddCoins(caughtFish.rewardCoins); // Menambah koin sesuai reward ikan
+
+        // Pemeriksaan apakah ikan yang ditangkap pemain adalah ikan yang diperlukan untuk misi
+        missionManager.CheckMissionCompletion(caughtFish);
 
         fishingText.text = string.Empty;
         isFishing = false;
