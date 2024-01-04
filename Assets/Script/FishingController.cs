@@ -11,6 +11,10 @@ public class FishingController : MonoBehaviour
     public Image FishImage;
     public TextMeshProUGUI FishName;
     public TextMeshProUGUI rewardInfo;
+    public GameObject belum1;
+    public GameObject belum2;
+    public GameObject sudah1;
+    public GameObject sudah2;
 
     public FishData[] fishDataArray;
     public PlayerData playerData;
@@ -26,9 +30,9 @@ public class FishingController : MonoBehaviour
 
     void Update()
     {
-        
 
-        
+        RestoreMissionStatus();
+
     }
 
     private void RestoreMissionStatus()
@@ -36,15 +40,34 @@ public class FishingController : MonoBehaviour
         int isMissionCompleted = PlayerPrefs.GetInt("IsMissionCompleted", 0);
         if (isMissionCompleted == 1)
         {
-            missionManager.OnMissionCompleted?.Invoke("Koi");
+            missionManager.OnMissionCompleted?.Invoke("Ikan Koi");
             if (missionManager.IsMisiKoiCompleted())
             {
-                Debug.Log("Berhasil mendapatkan ikan Koi (di awal game)");
+                belum1.gameObject.SetActive(false);
+                sudah1.gameObject.SetActive(true);
+                //Debug.Log("Berhasil mendapatkan ikan Koi (di awal game)");
             }
         }
         else
         {
+            belum1.gameObject.SetActive(true);
+            sudah1.gameObject.SetActive(false);
             Debug.Log("Misi ikan Koi belum berhasil");
+        }
+
+        int isMisiBerendamCompleted = PlayerPrefs.GetInt("IsMisiBerendamCompleted", 0);
+        if (isMisiBerendamCompleted == 1)
+        {
+            missionManager.OnMisiBerendamCompleted?.Invoke();
+            //Debug.Log("Berhasil mendapatkan misi berendam (di awal game)");
+            belum2.gameObject.SetActive(false);
+            sudah2.gameObject.SetActive(true);
+        }
+        else
+        {
+            //Debug.Log("Misi berendam belum berhasil");
+            belum2.gameObject.SetActive(true);
+            sudah2.gameObject.SetActive(false);
         }
     }
 

@@ -12,6 +12,7 @@ public class SwimmingController : MonoBehaviour
     public GameObject popUpBerendam;
 
     public PlayerData playerData;
+    public MissionManager missionManager;
     public UICoinDisplay coindisplay;
 
     private bool isSwimming = false;
@@ -101,6 +102,9 @@ public class SwimmingController : MonoBehaviour
 
         // Debug log
         Debug.Log("Berendam selesai!");
+
+        // Menandai bahwa misi berendam telah selesai
+        missionManager.SetMisiBerendamCompleted();
         // Aktifkan popUpBerendam selama 3 detik
         StartCoroutine(ShowPopUpBerendam());
     }

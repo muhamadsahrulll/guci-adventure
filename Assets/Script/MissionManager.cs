@@ -10,9 +10,13 @@ public class MissionManager : ScriptableObject
     public MissionCompletedDelegate OnMissionCompleted;
     public delegate void MisiKoiCompletedDelegate();
     public MisiKoiCompletedDelegate OnMisiKoiCompleted;
+    public delegate void MisiBerendamCompletedDelegate();
+    public MisiBerendamCompletedDelegate OnMisiBerendamCompleted;
 
     [SerializeField] private string misi1 = "Ikan Koi"; // Nama ikan yang diperlukan untuk misi
     private bool isMissionCompleted;
+    private bool isMisiKoiCompleted;
+    private bool isMisiBerendamCompleted;
 
     public void CheckMissionCompletion(FishData caughtFish)
     {
@@ -41,5 +45,17 @@ public class MissionManager : ScriptableObject
     public bool IsMisiKoiCompleted()
     {
         return isMissionCompleted && misi1 == "Ikan Koi";
+    }
+
+    public void SetMisiBerendamCompleted()
+    {
+        isMisiBerendamCompleted = true;
+        OnMisiBerendamCompleted?.Invoke();
+        PlayerPrefs.SetInt("IsMisiBerendamCompleted", isMisiBerendamCompleted ? 1 : 0);
+    }
+
+    public bool IsMisiBerendamCompleted()
+    {
+        return isMisiBerendamCompleted;
     }
 }
