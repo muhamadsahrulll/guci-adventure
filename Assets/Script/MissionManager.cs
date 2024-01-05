@@ -15,9 +15,45 @@ public class MissionManager : ScriptableObject
 
     [SerializeField] private string misi1 = "Ikan Koi"; // Nama ikan yang diperlukan untuk misi
     private bool isMissionCompleted;
-    private bool isMisiKoiCompleted;
+  
     private bool isMisiBerendamCompleted;
+    
+    public string fruitMissionName = "FruitMission";
+    public int requiredFruitCount = 5;
+    private int collectedFruitCount = 0;
 
+    private bool isFruitMissionCompleted;
+
+    private void Start()
+    {
+        LoadMissionStatus();
+    }
+
+    public void CheckFruitMissionCompletion()
+    {
+        if (!isFruitMissionCompleted && collectedFruitCount >= requiredFruitCount)
+        {
+            isFruitMissionCompleted = true;
+            Debug.Log("Misi buah selesai!");
+
+            // Panggil event ketika misi buah selesai
+            OnMissionCompleted?.Invoke(fruitMissionName);
+
+            // Simpan status misi buah ke PlayerPrefs
+            PlayerPrefs.SetInt("IsFruitMissionCompleted", isFruitMissionCompleted ? 1 : 0);
+            PlayerPrefs.SetInt("CollectedFruitCount", collectedFruitCount);
+        }
+    }
+
+    // Menambah jumlah buah yang sudah dikumpulkan
+    public void AddCollectedFruit()
+    {
+        collectedFruitCount++;
+        Debug.Log("Berhasil mengambil buah, total buah: " + collectedFruitCount);
+
+        // Cek apakah misi buah sudah selesai setelah menambah buah
+        CheckFruitMissionCompletion();
+    }
     public void CheckMissionCompletion(FishData caughtFish)
     {
         if (!isMissionCompleted && caughtFish != null && caughtFish.fishName == misi1)
@@ -33,6 +69,22 @@ public class MissionManager : ScriptableObject
             }
 
             PlayerPrefs.SetInt("IsMissionCompleted", isMissionCompleted ? 1 : 0);
+        }
+    }
+
+    // Fungsi untuk memuat status misi dari PlayerPrefs
+    private void LoadMissionStatus()
+    {
+        if (PlayerPrefs.HasKey("IsFruitMissionCompleted"))
+        {
+            isFruitMissionCompleted = PlayerPrefs.GetInt("IsFruitMissionCompleted") == 1;
+
+            if (isFruitMissionCompleted)
+            {
+                // Jika misi buah sudah selesai, muat jumlah buah yang sudah dikumpulkan
+                collectedFruitCount = PlayerPrefs.GetInt("CollectedFruitCount", 0);
+                Debug.Log("Load status misi buah, total buah: " + collectedFruitCount);
+            }
         }
     }
 

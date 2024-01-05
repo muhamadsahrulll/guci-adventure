@@ -6,6 +6,7 @@ TagManager:
   tags:
   - terrain
   - background
+  - Fruit
   layers:
   - Default
   - TransparentFX
