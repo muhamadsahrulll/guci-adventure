@@ -23,6 +23,7 @@ public class MissionManager : ScriptableObject
     private int collectedFruitCount = 0;
 
     private bool isFruitMissionCompleted;
+    private bool isCampBuilt;
 
     private void Start()
     {
@@ -86,6 +87,17 @@ public class MissionManager : ScriptableObject
                 Debug.Log("Load status misi buah, total buah: " + collectedFruitCount);
             }
         }
+
+        if (PlayerPrefs.HasKey("IsCampBuilt"))
+        {
+            isCampBuilt = PlayerPrefs.GetInt("IsCampBuilt") == 1;
+
+            if (isCampBuilt)
+            {
+                Debug.Log("Load status tenda: Tenda sudah dibangun!");
+                // Tambahkan logika atau pembaruan yang diperlukan ketika tenda sudah dibangun
+            }
+        }
     }
 
     public bool IsMissionCompleted()
@@ -109,5 +121,19 @@ public class MissionManager : ScriptableObject
     public bool IsMisiBerendamCompleted()
     {
         return isMisiBerendamCompleted;
+    }
+
+    
+
+    public void SetCampBuilt()
+    {
+        isCampBuilt = true;
+        Debug.Log("Tenda telah dibangun!");
+        PlayerPrefs.SetInt("IsCampBuilt", isCampBuilt ? 1 : 0);
+    }
+
+    public bool IsCampBuilt()
+    {
+        return isCampBuilt;
     }
 }
