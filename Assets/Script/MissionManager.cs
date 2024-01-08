@@ -24,11 +24,19 @@ public class MissionManager : ScriptableObject
 
     private bool isFruitMissionCompleted;
     private bool isCampBuilt;
+    private bool isCampfireBuilt;
 
-    private void Start()
+    public CampfireBuilder campfirebuild;
+
+    public void Start()
     {
+
         LoadMissionStatus();
+        SetCampBuilt();
+
+
     }
+    
 
     public void CheckFruitMissionCompletion()
     {
@@ -74,7 +82,7 @@ public class MissionManager : ScriptableObject
     }
 
     // Fungsi untuk memuat status misi dari PlayerPrefs
-    private void LoadMissionStatus()
+    public void LoadMissionStatus()
     {
         if (PlayerPrefs.HasKey("IsFruitMissionCompleted"))
         {
@@ -96,6 +104,19 @@ public class MissionManager : ScriptableObject
             {
                 Debug.Log("Load status tenda: Tenda sudah dibangun!");
                 // Tambahkan logika atau pembaruan yang diperlukan ketika tenda sudah dibangun
+
+            }
+        }
+        if (PlayerPrefs.HasKey("IsCampfireBuilt"))
+        {
+            isCampfireBuilt = PlayerPrefs.GetInt("IsCampfireBuilt") == 1;
+
+            if (isCampfireBuilt)
+            {
+                Debug.Log("Load status api unggun: Api unggun sudah dibangun!");
+                campfirebuild.campfirePrefab.SetActive(true);
+                campfirebuild.tanahfire.SetActive(false);
+                // Tambahkan logika atau pembaruan yang diperlukan ketika api unggun sudah dibangun
             }
         }
     }
