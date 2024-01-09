@@ -1,62 +1,104 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float speed = 3f;
-    private Rigidbody2D body;
+    private Rigidbody2D rb;
+    private bool moveLeft;
+    private bool moveRight;
+    private bool moveUp;
+    private bool moveDown;
     private Vector2 axisMovement;
+    public float speed = 5;
     private Animator anim;
     private BoxCollider2D coll;
-
-    private enum MovementState { idle, walk }
 
     // Start is called before the first frame update
     void Start()
     {
-        body = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         coll = GetComponent<BoxCollider2D>();
+
+        moveLeft = false;
+        moveRight = false;
+        moveUp = false;
+        moveDown = false;
+    }
+
+    public void PointerDownLeft()
+    {
+        moveLeft = true;
+    }
+
+    public void PointerUpLeft()
+    {
+        moveLeft = false;
+    }
+
+    public void PointerDownRight()
+    {
+        moveRight = true;
+    }
+
+    public void PointerUpRight()
+    {
+        moveRight = false;
+    }
+
+    public void PointerDownUp()
+    {
+        moveUp = true;
+    }
+
+    public void PointerUpUp()
+    {
+        moveUp = false;
+    }
+
+    public void PointerDownDown()
+    {
+        moveDown = true;
+    }
+
+    public void PointerUpDown()
+    {
+        moveDown = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        axisMovement.x = Input.GetAxisRaw("Horizontal");
-        axisMovement.y = Input.GetAxisRaw("Vertical");
+        
+        axisMovement.x = (moveLeft ? -1 : 0) + (moveRight ? 1 : 0);
+        axisMovement.y = (moveDown ? -1 : 0) + (moveUp ? 1 : 0);
 
         SetAnimationState();
-    }
-
-    private void FixedUpdate()
-    {
         Move();
     }
 
     private void Move()
     {
         Vector2 velocity = axisMovement.normalized * speed;
-        body.velocity = velocity;
-
-        flipping();
+        rb.velocity = velocity;
+        Flipping();
     }
 
     private void SetAnimationState()
     {
         if (axisMovement != Vector2.zero)
         {
-            // Set state to "walk" if there is movement
             anim.SetInteger("state", 1);
         }
         else
         {
-            // Set state to "idle" if there is no movement
             anim.SetInteger("state", 0);
         }
     }
 
-    private void flipping()
+    private void Flipping()
     {
         bool movingLeft = axisMovement.x < 0;
         bool movingRight = axisMovement.x > 0;
