@@ -15,6 +15,7 @@ public class FishingController : MonoBehaviour
     public GameObject belum2;
     public GameObject sudah1;
     public GameObject sudah2;
+    public GameObject tidakCukup;
 
     public FishData[] fishDataArray;
     public PlayerData playerData;
@@ -147,8 +148,15 @@ public class FishingController : MonoBehaviour
         }
         else
         {
+            StartCoroutine(tidakCukupKoin(3f));
             Debug.Log("Koin tidak cukup");
         }
+    }
+    IEnumerator tidakCukupKoin(float seconds)
+    {
+        tidakCukup.gameObject.SetActive(true);
+        yield return new WaitForSeconds(seconds);
+        tidakCukup.gameObject.SetActive(false);
     }
 
     public void AmbilIkan()

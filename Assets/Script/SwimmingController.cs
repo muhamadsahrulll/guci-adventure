@@ -10,6 +10,7 @@ public class SwimmingController : MonoBehaviour
     public TextMeshProUGUI countdownText;
     public TextMeshProUGUI swimmingText;
     public GameObject popUpBerendam;
+    public GameObject tidakCukup;
 
     public PlayerData playerData;
     public MissionManager missionManager;
@@ -38,11 +39,18 @@ public class SwimmingController : MonoBehaviour
         }
         else
         {
+            StartCoroutine(tidakCukupKoin(3f));
             Debug.Log("Koin tidak cukup");
         }
     }
+    IEnumerator tidakCukupKoin(float seconds)
+    {
+        tidakCukup.gameObject.SetActive(true);
+        yield return new WaitForSeconds(seconds);
+        tidakCukup.gameObject.SetActive(false);
+    }
 
-    
+
     void Update()
     {
         //if (Input.GetKeyDown(KeyCode.B) && !isSwimming)
