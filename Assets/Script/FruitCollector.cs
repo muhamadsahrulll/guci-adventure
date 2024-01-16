@@ -11,6 +11,8 @@ public class FruitCollector : MonoBehaviour
     public MissionManager missionManager;
     public int requiredFruitCount = 5;
     public int coinReward = 50;
+    public GameObject reward;
+    public TextMeshProUGUI rewardTxt;
 
     private int collectedFruitCount = 0;
 
@@ -87,6 +89,8 @@ public class FruitCollector : MonoBehaviour
         // Give the player a reward (coins in this case)
         //PlayerData.Instance.AddCoins(coinReward);
         playerData.AddCoins(coinReward);
+        reward.gameObject.SetActive(true);
+        rewardTxt.text = coinReward + "Coin";
 
         // Save mission completion status
         PlayerPrefs.SetInt("IsFruitMissionCompleted", 1);

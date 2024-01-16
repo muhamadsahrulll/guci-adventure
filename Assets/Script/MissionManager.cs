@@ -27,10 +27,11 @@ public class MissionManager : ScriptableObject
     private bool isCampfireBuilt;
 
     public CampfireBuilder campfirebuild;
+    public CampBuilder campbuilder;
 
     public void Start()
     {
-
+        //campbuilder = FindObjectOfType<CampBuilder>();
         LoadMissionStatus();
         SetCampBuilt();
 
@@ -103,6 +104,8 @@ public class MissionManager : ScriptableObject
             if (isCampBuilt)
             {
                 Debug.Log("Load status tenda: Tenda sudah dibangun!");
+                campbuilder.campPrefab.SetActive(true);
+                campbuilder.sudahTenda.SetActive(true);
                 // Tambahkan logika atau pembaruan yang diperlukan ketika tenda sudah dibangun
 
             }

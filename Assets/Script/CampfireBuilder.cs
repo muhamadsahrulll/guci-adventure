@@ -5,10 +5,14 @@ using UnityEngine;
 public class CampfireBuilder : MonoBehaviour
 {
     public GameObject campfirePrefab; // Seret prefab api unggun ke sini
+    public GameObject campPrefab;
     public GameObject tanahfire;
     public PlayerData playerData; // Referensi ke PlayerData script
     public MissionManager missionManager; // Referensi ke MissionManager script
     //public int buildCost = 0;
+    public GameObject perluKayu;
+    public GameObject perluTenda;
+    
     
     void Start()
     {
@@ -28,6 +32,7 @@ public class CampfireBuilder : MonoBehaviour
         if (!missionManager.IsCampBuilt())
         {
             Debug.Log("Anda harus membangun tenda terlebih dahulu!");
+            StartCoroutine(tidakCukuptenda(2f));
             return;
         }
 
@@ -48,8 +53,22 @@ public class CampfireBuilder : MonoBehaviour
         else
         {
             Debug.Log("Anda memerlukan 4 kayu untuk membangun api unggun!");
+            StartCoroutine(tidakCukupKayu(2f));
         }
     }
-        
+    IEnumerator tidakCukupKayu(float seconds)
+    {
+        perluKayu.gameObject.SetActive(true);
+        yield return new WaitForSeconds(seconds);
+        perluKayu.gameObject.SetActive(false);
+    }
+
+    IEnumerator tidakCukuptenda(float seconds)
+    {
+        perluTenda.gameObject.SetActive(true);
+        yield return new WaitForSeconds(seconds);
+        perluTenda.gameObject.SetActive(false);
+    }
+
 }
 
