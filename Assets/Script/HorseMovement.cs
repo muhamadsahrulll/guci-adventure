@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class PlayerMovement : MonoBehaviour
+public class HorseMovement : MonoBehaviour
 {
     private CameraFollow cameraFollowScript;
     private Rigidbody2D rb;
@@ -14,21 +13,27 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 axisMovement;
     public float speed = 5;
     private Animator anim;
-    private BoxCollider2D coll;
 
-    // Start is called before the first frame update
+    // Tambahkan dua parameter animasi baru
+    private bool isRide;
+    private bool isRiding;
+
     void Start()
     {
+        
         cameraFollowScript = Camera.main.GetComponent<CameraFollow>();
         
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        coll = GetComponent<BoxCollider2D>();
 
         moveLeft = false;
         moveRight = false;
         moveUp = false;
         moveDown = false;
+
+        // Inisialisasi parameter animasi
+        isRide = false;
+        isRiding = false;
         //ToggleCameraFollow();
     }
 
@@ -72,42 +77,36 @@ public class PlayerMovement : MonoBehaviour
         moveDown = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
-
-
         
         axisMovement.x = (moveLeft ? -1 : 0) + (moveRight ? 1 : 0);
         axisMovement.y = (moveDown ? -1 : 0) + (moveUp ? 1 : 0);
 
-        SetAnimationState();
+        //SetAnimationState();
         Move();
+        
     }
 
     private void Move()
     {
+
         Vector2 velocity = axisMovement.normalized * speed;
         rb.velocity = velocity;
+        anim.SetBool("isRide", true);
+        // Tambahkan logika isRiding berdasarkan pergerakan
+        isRiding = velocity.magnitude > 0;
+        anim.SetBool("isRiding", isRiding);
+
         Flipping();
     }
 
-    private void SetAnimationState()
-    {
-        if (axisMovement != Vector2.zero)
-        {
-            anim.SetInteger("state", 1);
-        }
-        else
-        {
-            anim.SetInteger("state", 0);
-        }
-    }
+    
 
     private void Flipping()
     {
-        bool movingLeft = axisMovement.x < 0;
-        bool movingRight = axisMovement.x > 0;
+        bool movingLeft = axisMovement.x > 0;
+        bool movingRight = axisMovement.x < 0;
 
         if (movingLeft)
         {
@@ -118,6 +117,20 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = new Vector3(1f, transform.localScale.y, 1f);
         }
     }
+
+    // Getter untuk isRide
+    public bool IsRide()
+    {
+        return isRide;
+    }
+
+    // Setter untuk isRide
+    public void SetIsRide(bool value)
+    {
+        isRide = true;
+        anim.SetBool("isRide", isRide);
+    }
+
     void ToggleCameraFollow()
     {
         if (cameraFollowScript != null)
