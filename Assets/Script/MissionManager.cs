@@ -13,11 +13,15 @@ public class MissionManager : ScriptableObject
     public delegate void MisiBerendamCompletedDelegate();
     public MisiBerendamCompletedDelegate OnMisiBerendamCompleted;
 
+    public delegate void MisiSewaKudaCompletedDelegate();
+    public MisiBerendamCompletedDelegate OnMisiSewaKudaCompleted;
+
     [SerializeField] private string misi1 = "Ikan Koi"; // Nama ikan yang diperlukan untuk misi
     private bool isMissionCompleted;
   
     private bool isMisiBerendamCompleted;
-    
+    private bool isMisiSewaKudaCompleted;
+
     public string fruitMissionName = "FruitMission";
     public int requiredFruitCount = 5;
     private int collectedFruitCount = 0;
@@ -148,7 +152,19 @@ public class MissionManager : ScriptableObject
         return isMisiBerendamCompleted;
     }
 
-    
+    public void SetMisiSewaKudaCompleted()
+    {
+        isMisiSewaKudaCompleted = true;
+        OnMisiSewaKudaCompleted?.Invoke();
+        PlayerPrefs.SetInt("IsMisiSewaKudaCompleted", isMisiSewaKudaCompleted ? 1 : 0);
+    }
+
+    public bool IsMisiSewaKudaCompleted()
+    {
+        return isMisiSewaKudaCompleted;
+    }
+
+
 
     public void SetCampBuilt()
     {

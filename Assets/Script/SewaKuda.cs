@@ -11,7 +11,9 @@ public class SewaKuda : MonoBehaviour
     public GameObject sewaPanel;
     public GameObject tidakCukup;
     public GameObject popupSewa;
-    
+    public GameObject belum2;
+    public GameObject sudah2;
+
 
     public PlayerData playerData;
     public MissionManager missionManager;
@@ -28,6 +30,27 @@ public class SewaKuda : MonoBehaviour
         timer.gameObject.SetActive(false);
         sewaPanel.gameObject.SetActive(false); // Nonaktifkan teks berendam pada awalnya
         popupSewa.SetActive(false);
+        
+    }
+
+    
+
+    void RestoreMissionStatus()
+    {
+        int isMisiSewaKudaCompleted = PlayerPrefs.GetInt("IsMisiSewaKudaCompleted", 0);
+        if (isMisiSewaKudaCompleted == 1)
+        {
+            missionManager.OnMisiSewaKudaCompleted?.Invoke();
+            //Debug.Log("Berhasil mendapatkan misi berendam (di awal game)");
+            belum2.gameObject.SetActive(false);
+            sudah2.gameObject.SetActive(true);
+        }
+        else
+        {
+            //Debug.Log("Misi berendam belum berhasil");
+            belum2.gameObject.SetActive(true);
+            sudah2.gameObject.SetActive(false);
+        }
     }
 
     public void StartSewa()
@@ -55,6 +78,7 @@ public class SewaKuda : MonoBehaviour
 
     void Update()
     {
+        RestoreMissionStatus();
         if (isRiding)
         {
             currentSewaTime -= Time.deltaTime;
@@ -108,7 +132,7 @@ public class SewaKuda : MonoBehaviour
         Debug.Log("Berendam selesai!");
 
         // Menandai bahwa misi berendam telah selesai
-        missionManager.SetMisiBerendamCompleted();
+        missionManager.SetMisiSewaKudaCompleted();
         // Aktifkan popUpBerendam selama 3 detik
         StartCoroutine(ShowPopUpBerendam());
     }
