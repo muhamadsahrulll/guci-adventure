@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/forest.unity
     guid: 7fbd3a2671432a241b5d5522aaf7811b
+  - enabled: 1
+    path: Assets/Scenes/kuda.unity
+    guid: f972af34fcb5dec41af8c6d5c05f7a29
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 05115cd57125b954684b293a55f4ce61, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: b2bda0e1e9dd1344088f3efb7e2169c6, type: 2}
