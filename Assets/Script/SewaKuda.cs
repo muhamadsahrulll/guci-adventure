@@ -5,104 +5,136 @@ using TMPro;
 
 public class SewaKuda : MonoBehaviour
 {
-    public TextMeshProUGUI waktuRentalText;
-    //public int biayaSewa = 100;
-    public float waktuRental = 60f; // Dalam detik
+    public GameObject player;
+    public GameObject kuda;
+    public TextMeshProUGUI timer;
+    public GameObject sewaPanel;
+    public GameObject tidakCukup;
+    public GameObject popupSewa;
+    
 
-    private bool sedangSewa = false;
+    public PlayerData playerData;
+    public MissionManager missionManager;
+    public UICoinDisplay coindisplay;
 
-    private void Start()
+    private bool isRiding = false;
+    private float sewaDurasi = 10f;
+    private float currentSewaTime;
+
+    void Start()
     {
-        // Cek status sewa kuda dari PlayerPrefs
-        if (PlayerPrefs.HasKey("SewaKudaStatus"))
-        {
-            // Pemain sedang menyewa kuda, lakukan inisialisasi
-            OnSewaKudaButtonPressed();
-        }
+        Debug.Log(playerData.coins);
+        kuda.SetActive(false);
+        timer.gameObject.SetActive(false);
+        sewaPanel.gameObject.SetActive(false); // Nonaktifkan teks berendam pada awalnya
+        popupSewa.SetActive(false);
     }
 
-    public void OnSewaKudaButtonPressed()
+    public void StartSewa()
     {
-        // Cek apakah pemain memiliki cukup koin untuk menyewa kuda
-        if (PlayerData.Instance.coins >= 100 && !sedangSewa)
+        if (!isRiding && playerData.coins >= 100)
         {
-            // Kurangi koin pemain
-            PlayerData.Instance.coins -= 100;
-            PlayerPrefs.SetInt("PlayerCoins", PlayerData.Instance.coins);
-
-            // Simpan status sewa kuda ke PlayerPrefs
-            PlayerPrefs.SetInt("SewaKudaStatus", 1);
-
-            // Set aktivitas game object kuda dan non-aktifkan game object player
-            SetAktivitasKuda(true);
-            SetAktivitasPlayer(false);
-
-            // Mulai hitung mundur waktu rental
-            StartCoroutine(HitungMundurRental());
-
-            // Set status sedang sewa
-            sedangSewa = true;
-
-            // Debug status sewa
-            Debug.Log("Pemain menyewa kuda.");
+            playerData.coins -= 100; // Mengurangkan koin saat berenang
+            PlayerPrefs.SetInt("PlayerCoins", playerData.coins);
+            StartRiding();
         }
-        else if (sedangSewa)
-        {
-            // Tampilkan debug jika pemain sudah menyewa kuda
-            Debug.Log("Pemain sudah menyewa kuda.");
-        }
+
         else
         {
-            // Tampilkan debug jika koin tidak mencukupi
-            Debug.Log("Koin tidak mencukupi untuk menyewa kuda.");
+            StartCoroutine(tidakCukupKoin(3f));
+            Debug.Log("Koin tidak cukup");
         }
     }
 
-    private IEnumerator HitungMundurRental()
+    IEnumerator tidakCukupKoin(float seconds)
     {
-        float waktuSisa = waktuRental;
+        tidakCukup.gameObject.SetActive(true);
+        yield return new WaitForSeconds(seconds);
+        tidakCukup.gameObject.SetActive(false);
+    }
 
-        while (waktuSisa > 0f)
+    void Update()
+    {
+        if (isRiding)
         {
-            waktuRentalText.text = "Waktu Rental: " + Mathf.Ceil(waktuSisa).ToString();
+            currentSewaTime -= Time.deltaTime;
+            timer.text = Mathf.CeilToInt(currentSewaTime).ToString();
+
+            if (currentSewaTime <= 0)
+            {
+                EndRiding();
+            }
+        }
+    }
+
+    void StartRiding()
+    {
+        isRiding = true;
+        player.SetActive(false);
+        kuda.SetActive(true);
+        currentSewaTime = sewaDurasi;
+
+        // Mengatur posisi berendam (misalnya tengah kolam)
+        //swimSprite.transform.position = new Vector3(7.57f, -1.85f, 0f);
+
+        // Aktifkan countdownText dan swimmingText
+        sewaPanel.gameObject.SetActive(true);
+        timer.gameObject.SetActive(true);
+
+        // Mulai countdown
+        InvokeRepeating("UpdateCountdownText", 0f, 1f);
+    }
+
+    void EndRiding()
+    {
+        isRiding = false;
+        kuda.SetActive(false);
+        player.SetActive(true);
+
+        // Reset posisi player ke posisi awal sebelum berendam
+        player.transform.localPosition = Vector3.zero;
+
+        // Nonaktifkan countdownText dan swimmingText
+        sewaPanel.gameObject.SetActive(false);
+        timer.gameObject.SetActive(false);
+
+        // Hentikan countdown
+        StopCoroutine(UpdateCountdownTextCoroutine());
+
+        // Hentikan countdown
+        CancelInvoke("UpdateCountdownText");
+
+        // Debug log
+        Debug.Log("Berendam selesai!");
+
+        // Menandai bahwa misi berendam telah selesai
+        missionManager.SetMisiBerendamCompleted();
+        // Aktifkan popUpBerendam selama 3 detik
+        StartCoroutine(ShowPopUpBerendam());
+    }
+
+    void UpdateCountdownText()
+    {
+        timer.text = Mathf.CeilToInt(currentSewaTime).ToString();
+    }
+
+    IEnumerator UpdateCountdownTextCoroutine()
+    {
+        while (currentSewaTime > 0)
+        {
+            timer.text = Mathf.CeilToInt(currentSewaTime).ToString();
             yield return new WaitForSeconds(1f);
-            waktuSisa -= 1f;
+            currentSewaTime -= 1f;
         }
 
-        // Waktu rental habis, non-aktifkan kuda dan aktifkan player
-        SetAktivitasKuda(false);
-        SetAktivitasPlayer(true);
-
-        // Hapus status sewa kuda dari PlayerPrefs
-        PlayerPrefs.DeleteKey("SewaKudaStatus");
-
-        // Set status sedang sewa menjadi false
-        sedangSewa = false;
-
-        // Debug ketika waktu rental habis
-        Debug.Log("Waktu rental kuda habis.");
+        EndRiding();
     }
 
-    private void SetAktivitasKuda(bool aktif)
+    IEnumerator ShowPopUpBerendam()
     {
-        // Set aktivitas game object kuda
-        // Misalnya, jika kuda diwakili oleh GameObject bernama "Kuda"
-        GameObject kuda = GameObject.Find("Kuda");
-        if (kuda != null)
-        {
-            kuda.SetActive(aktif);
-        }
-    }
-
-    private void SetAktivitasPlayer(bool aktif)
-    {
-        // Set aktivitas game object player
-        // Misalnya, jika player diwakili oleh GameObject bernama "Player"
-        GameObject player = GameObject.Find("Player");
-        if (player != null)
-        {
-            player.SetActive(aktif);
-        }
+        popupSewa.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        popupSewa.SetActive(false);
     }
 
 }
