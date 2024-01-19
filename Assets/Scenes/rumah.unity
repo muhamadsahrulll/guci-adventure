@@ -3372,7 +3372,7 @@ MonoBehaviour:
     - Halo jaka selamat datang di Tegal, ini adalah rumah saya, kau bisa tidur dimana
       saja
     - Ini ada sedikit uang untuk bisa berjalan jalan di Guci
-    - Selamat Berpetualangan!
+    - Selamat Berpetualangan! Kau bisa ke pintu bawah untuk langsung ke Guci!
 --- !u!1 &384720748
 GameObject:
   m_ObjectHideFlags: 0
@@ -5226,6 +5226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1650500432}
+  kuda: {fileID: 0}
   smoothSpeed: 0.125
 --- !u!1 &828552511
 GameObject:
@@ -6440,6 +6441,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinText: {fileID: 2080103015}
   playerData: {fileID: 11400000, guid: 5a1b7ae000f2abb4093574be10b242eb, type: 2}
+  Selesaikan: {fileID: 0}
 --- !u!4 &1017193037
 Transform:
   m_ObjectHideFlags: 0

@@ -108,7 +108,7 @@ public class MissionManager : ScriptableObject
             if (isCampBuilt)
             {
                 Debug.Log("Load status tenda: Tenda sudah dibangun!");
-                campbuilder.tendaBtn.gameObject.SetActive(false);
+                campbuilder.tendaBtn.SetActive(false);
                 campbuilder.tenda.gameObject.SetActive(true);
                 campbuilder.sudahTenda.SetActive(true);
                 // Tambahkan logika atau pembaruan yang diperlukan ketika tenda sudah dibangun
