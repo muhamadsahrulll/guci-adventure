@@ -20,7 +20,7 @@ public class SewaKuda : MonoBehaviour
     public UICoinDisplay coindisplay;
 
     private bool isRiding = false;
-    private float sewaDurasi = 10f;
+    private float sewaDurasi = 60f;
     private float currentSewaTime;
 
     void Start()
