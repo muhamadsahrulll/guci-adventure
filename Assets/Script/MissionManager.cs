@@ -177,4 +177,9 @@ public class MissionManager : ScriptableObject
     {
         return isCampBuilt;
     }
+
+    public bool IsCampfireBuilt()
+    {
+        return isCampfireBuilt;
+    }
 }

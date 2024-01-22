@@ -54,4 +54,5 @@ public class PlayerData : ScriptableObject
         // Panggil event ketika nilai kayu berubah
         OnWoodChanged?.Invoke();
     }
+
 }
