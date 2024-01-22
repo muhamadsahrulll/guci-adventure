@@ -10858,6 +10858,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinText: {fileID: 297972938}
   playerData: {fileID: 11400000, guid: 5a1b7ae000f2abb4093574be10b242eb, type: 2}
+  Selesaikan: {fileID: 0}
 --- !u!114 &1643968778
 MonoBehaviour:
   m_ObjectHideFlags: 0
