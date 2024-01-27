@@ -17,7 +17,7 @@ public class SwimmingController : MonoBehaviour
     public UICoinDisplay coindisplay;
 
     private bool isSwimming = false;
-    private float swimDuration = 30f;
+    private float swimDuration = 10f;
     private float currentSwimTime;
 
     void Start()
