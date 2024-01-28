@@ -572,7 +572,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -6.4678802, y: 1.0219665}
+  m_Offset: {x: -6.1612024, y: 0.7827574}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -583,7 +583,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.869772, y: 4.690052}
+  m_Size: {x: 5.6980324, y: 5.1684704}
   m_EdgeRadius: 0
 --- !u!114 &49698900
 MonoBehaviour:
@@ -9610,7 +9610,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 7.0254235, y: -1.2457874}
+  m_Offset: {x: 7.036344, y: -1.2457874}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -9621,7 +9621,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 6.0648413, y: 5.4930034}
+  m_Size: {x: 6.043, y: 5.4930034}
   m_EdgeRadius: 0
 --- !u!483693784 &1498095550
 TilemapRenderer:
@@ -15107,7 +15107,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -6.5171547, y: 0.96109724}
+  m_Offset: {x: -6.486487, y: 1.1470326}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -15118,7 +15118,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.064068, y: 4.0938177}
+  m_Size: {x: 5.0027323, y: 3.721947}
   m_EdgeRadius: 0
 --- !u!483693784 &2007833261
 TilemapRenderer:
