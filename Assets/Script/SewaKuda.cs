@@ -57,7 +57,7 @@ public class SewaKuda : MonoBehaviour
     {
         if (!isRiding && playerData.coins >= 100)
         {
-            playerData.coins -= 100; // Mengurangkan koin saat berenang
+            playerData.coins -= 100; // Mengurangkan koin saat sewa
             PlayerPrefs.SetInt("PlayerCoins", playerData.coins);
             StartRiding();
         }
