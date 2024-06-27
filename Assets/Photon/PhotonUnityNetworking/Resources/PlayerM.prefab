@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 3778645145080579601}
   - component: {fileID: 3778645145080579605}
   - component: {fileID: 3731511923965476}
+  - component: {fileID: 8088291640131489318}
   m_Layer: 0
   m_Name: PlayerM
   m_TagString: Player
@@ -181,6 +182,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 3778645145080579602}
   - {fileID: 3778645145080579601}
+  - {fileID: 3778645145080579605}
+  - {fileID: 8088291640131489318}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -245,6 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 961ff53c252cd8842a0337efc9eb9956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerNameText: {fileID: 0}
   moveSpeed: 5
 --- !u!114 &3731511923965476
 MonoBehaviour:
@@ -261,3 +265,24 @@ MonoBehaviour:
   scriptsToIgnore:
   - {fileID: 3778645145080579605}
   - {fileID: 3731511923965476}
+--- !u!114 &8088291640131489318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5528911694332881747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 3
+    SynchronizeType: 2
+    Name: state
+  m_SynchronizeLayers:
+  - SynchronizeType: 2
+    LayerIndex: 0

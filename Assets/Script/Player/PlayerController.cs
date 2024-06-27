@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Photon.Pun;
+using TMPro;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IPunObservable
 {
     public bool FacingLeft { get { return facingLeft; } }
+    public TextMeshProUGUI playerNameText;
 
     [SerializeField] private float moveSpeed = 6f;
 
@@ -16,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private PlayerControl playerControl;
 
     private bool facingLeft = false;
+    private PhotonView photonView;
 
     private void Awake()
     {
@@ -23,6 +27,13 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         playerControl = new PlayerControl();
+        photonView = GetComponent<PhotonView>();
+
+        if (photonView.IsMine)
+        {
+            // Set player name text to PhotonNetwork.NickName
+            playerNameText.text = PhotonNetwork.NickName;
+        }
     }
 
     private void OnEnable()
@@ -37,29 +48,30 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        PlayerInput();
+        if (photonView.IsMine)
+        {
+            PlayerInput();
+        }
     }
 
     private void FixedUpdate()
     {
-        AdjustPlayerFacingDirection();
-        Move();
+        if (photonView.IsMine)
+        {
+            Move();
+        }
     }
 
     private void PlayerInput()
     {
         movement = playerControl.Movement.Move.ReadValue<Vector2>();
-
-        // Set animasi state sesuai dengan vector gerakan
         SetAnimationState();
     }
 
     private void Move()
     {
-        // Gerakkan karakter berdasarkan input
         rb.velocity = movement * moveSpeed;
 
-        // Flipping sprite sesuai arah gerakan
         if (movement.x != 0)
         {
             sprite.flipX = movement.x < 0;
@@ -67,21 +79,32 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void AdjustPlayerFacingDirection()
-    {
-        // Sudah diimplementasikan dalam fungsi Move
-    }
-
     private void SetAnimationState()
     {
-        // Implementasi animasi state dari script A
         if (movement != Vector2.zero)
         {
-            anim.SetInteger("state", 1); // Sesuaikan dengan state animasi yang Anda miliki
+            anim.SetInteger("state", 1);
         }
         else
         {
-            anim.SetInteger("state", 0); // Sesuaikan dengan state animasi yang Anda miliki
+            anim.SetInteger("state", 0);
+        }
+    }
+
+    // Sinkronisasi animasi dan arah pemain
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(anim.GetInteger("state"));
+            stream.SendNext(facingLeft);
+        }
+        else
+        {
+            int state = (int)stream.ReceiveNext();
+            anim.SetInteger("state", state);
+            facingLeft = (bool)stream.ReceiveNext();
+            sprite.flipX = facingLeft;
         }
     }
 }
