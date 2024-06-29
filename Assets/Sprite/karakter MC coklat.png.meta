@@ -1,0 +1,326 @@
+fileFormatVersion: 2
+guid: 9ef74155abbc4d947a637710196cace1
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: karakter MC coklat_0
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 156
+        width: 118
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5824f0499d0a90c438b50cb024f16b93
+      internalID: 718494781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: karakter MC coklat_1
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 164
+        width: 111
+        height: 134
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccb807cd85fa1d143a54fa426fa5ce70
+      internalID: 121333725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: karakter MC coklat_3
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 168
+        width: 92
+        height: 126
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05e06314bdc2353468de7d758a7d5230
+      internalID: -799347299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: karakter MC coklat_6
+      rect:
+        serializedVersion: 2
+        x: 658
+        y: 78
+        width: 94
+        height: 138
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53cf9efce4e42d641b2bcf966358f91d
+      internalID: 764088684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: karakter MC coklat_7
+      rect:
+        serializedVersion: 2
+        x: 775
+        y: 78
+        width: 95
+        height: 141
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e0a437498dd9ac43a3772d38fc68b74
+      internalID: 1656012166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: karakter MC coklat_9
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 27
+        width: 108
+        height: 161
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8041b684b870c534d9a1cec4de3e09f3
+      internalID: -1351440321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: karakter MC coklat_17
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 23
+        width: 104
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbb35a9e0c758ed498455ea615835ad8
+      internalID: 279794125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      karakter MC coklat_0: 718494781
+      karakter MC coklat_1: 121333725
+      karakter MC coklat_10: -1304001546
+      karakter MC coklat_11: 917862471
+      karakter MC coklat_12: -1423067952
+      karakter MC coklat_13: -2011800277
+      karakter MC coklat_14: 735228238
+      karakter MC coklat_15: -1651068391
+      karakter MC coklat_16: 1712426816
+      karakter MC coklat_17: 279794125
+      karakter MC coklat_18: 707955221
+      karakter MC coklat_19: 854065478
+      karakter MC coklat_2: 294295762
+      karakter MC coklat_20: -1847128286
+      karakter MC coklat_21: 864040433
+      karakter MC coklat_22: 2074694574
+      karakter MC coklat_23: 1277713976
+      karakter MC coklat_24: -2090025316
+      karakter MC coklat_25: 608759865
+      karakter MC coklat_26: -96257165
+      karakter MC coklat_27: 667356986
+      karakter MC coklat_28: -1649651083
+      karakter MC coklat_29: -950677197
+      karakter MC coklat_3: -799347299
+      karakter MC coklat_30: -1432220758
+      karakter MC coklat_31: 87080198
+      karakter MC coklat_32: 779457236
+      karakter MC coklat_33: -1131900687
+      karakter MC coklat_34: 1225950693
+      karakter MC coklat_35: 1334412326
+      karakter MC coklat_36: 561857625
+      karakter MC coklat_37: -2004329547
+      karakter MC coklat_38: -1776190114
+      karakter MC coklat_39: -2132016939
+      karakter MC coklat_4: 1503499242
+      karakter MC coklat_40: 168552910
+      karakter MC coklat_41: 1279668643
+      karakter MC coklat_42: 834905741
+      karakter MC coklat_43: 876941304
+      karakter MC coklat_5: -1807880231
+      karakter MC coklat_6: 764088684
+      karakter MC coklat_7: 1656012166
+      karakter MC coklat_8: 905627219
+      karakter MC coklat_9: -1351440321
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

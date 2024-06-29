@@ -30,7 +30,7 @@ public class UICoinDisplay : MonoBehaviour
     private void Start()
     {
         UpdateCoinUI();
-        Selesaikan.gameObject.SetActive(true);
+        //Selesaikan.gameObject.SetActive(true);
     }
 
     private void Update()

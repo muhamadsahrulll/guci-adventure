@@ -8,7 +8,6 @@ using TMPro;
 public class PlayerController : MonoBehaviour, IPunObservable
 {
     public bool FacingLeft { get { return facingLeft; } }
-    public TextMeshProUGUI playerNameText;
 
     [SerializeField] private float moveSpeed = 6f;
 
@@ -28,12 +27,6 @@ public class PlayerController : MonoBehaviour, IPunObservable
         sprite = GetComponent<SpriteRenderer>();
         playerControl = new PlayerControl();
         photonView = GetComponent<PhotonView>();
-
-        if (photonView.IsMine)
-        {
-            // Set player name text to PhotonNetwork.NickName
-            playerNameText.text = PhotonNetwork.NickName;
-        }
     }
 
     private void OnEnable()

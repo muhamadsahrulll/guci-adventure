@@ -6,12 +6,15 @@ using Photon.Realtime;
 
 public class PhotonManager : MonoBehaviourPunCallbacks
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        //PhotonNetwork.ConnectUsingSettings();
-    }
+    public UIMultiplayer uiManager;
 
+    private void Start()
+    {
+        if (uiManager == null)
+        {
+            uiManager = FindObjectOfType<UIMultiplayer>();
+        }
+    }
 
     public override void OnConnectedToMaster()
     {
@@ -25,7 +28,25 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.Instantiate("PlayerM", transform.position, Quaternion.identity);
-        //FindObjectOfType<PlayerMovement>().SetPlayerReady(true); // Pastikan PlayerMovement sudah ada di scene
+        string selectedCharacterName = PlayerPrefs.GetString("SelectedCharacter");
+        Debug.Log("Selected character name: " + selectedCharacterName);
+        GameObject playerPrefab = Resources.Load<GameObject>(selectedCharacterName);
+
+        if (playerPrefab != null)
+        {
+            PhotonNetwork.Instantiate(playerPrefab.name, Vector3.zero, Quaternion.identity);
+            Debug.Log("Instantiated character: " + playerPrefab.name);
+        }
+        else
+        {
+            Debug.LogError("Selected character prefab not found: " + selectedCharacterName);
+        }
+
+        uiManager.UpdatePlayerNames();
+    }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        uiManager.UpdatePlayerNames();
     }
 }
