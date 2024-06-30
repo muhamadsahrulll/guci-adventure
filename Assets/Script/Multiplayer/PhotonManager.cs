@@ -8,6 +8,21 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 {
     public UIMultiplayer uiManager;
 
+    private static PhotonManager instance;
+    public static PhotonManager Instance { get { return instance; } }
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void Start()
     {
         if (uiManager == null)
@@ -41,17 +56,11 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         }
 
         uiManager.UpdatePlayerNames();
-        UpdateCoinsFromPlayerData();
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         uiManager.UpdatePlayerNames();
-    }
-
-    private void UpdateCoinsFromPlayerData()
-    {
-        uiManager.UpdateCoins();
     }
 
     public void AddCoinsToPlayer(bool isPlayerA, int amount)
