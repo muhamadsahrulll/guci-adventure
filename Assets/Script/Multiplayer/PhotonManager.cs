@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
-using Cinemachine;
 
 public class PhotonManager : MonoBehaviourPunCallbacks
 {
@@ -24,7 +23,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedLobby()
     {
-        // Join atau buat ruangan dengan nama "Room" dan maksimal 2 pemain
         PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions { MaxPlayers = 2 }, TypedLobby.Default);
     }
 
@@ -35,39 +33,38 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
         if (playerPrefab != null)
         {
-            // Instantiate player prefab
-            GameObject player = PhotonNetwork.Instantiate(playerPrefab.name, Vector3.zero, Quaternion.identity);
-
-            // Set Cinemachine target
-            SetCinemachineTarget(player.transform);
+            PhotonNetwork.Instantiate(playerPrefab.name, Vector3.zero, Quaternion.identity);
         }
         else
         {
             Debug.LogError("Selected character prefab not found");
         }
 
-        // Update player names in UI
         uiManager.UpdatePlayerNames();
+        UpdateCoinsFromPlayerData();
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        // Update player names in UI
         uiManager.UpdatePlayerNames();
     }
 
-    private void SetCinemachineTarget(Transform target)
+    private void UpdateCoinsFromPlayerData()
     {
-        CinemachineVirtualCamera virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
+        uiManager.UpdateCoins();
+    }
 
-        if (virtualCamera != null)
+    public void AddCoinsToPlayer(bool isPlayerA, int amount)
+    {
+        PlayerDataMultiplayer playerData = PlayerDataMultiplayer.Instance;
+        if (isPlayerA)
         {
-            virtualCamera.Follow = target;
-            // virtualCamera.LookAt = target; // Uncomment this if you want the camera to look at the target
+            playerData.AddPlayerACoins(amount);
         }
         else
         {
-            Debug.LogError("Cinemachine Virtual Camera not found");
+            playerData.AddPlayerBCoins(amount);
         }
+        uiManager.UpdateCoins();
     }
 }

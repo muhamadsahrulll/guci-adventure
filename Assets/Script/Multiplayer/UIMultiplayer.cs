@@ -12,6 +12,7 @@ public class UIMultiplayer : MonoBehaviour
     public GameObject multiplayerNama;
     public TextMeshProUGUI player1NameText;  // Referensi ke TextMeshPro untuk menampilkan nama pemain 1
     public TextMeshProUGUI player2NameText;  // Referensi ke TextMeshPro untuk menampilkan nama pemain 2
+    public TextMeshProUGUI coinsText;  // Referensi ke TextMeshPro untuk menampilkan jumlah koin
 
     // Tambahkan referensi untuk tombol pemilihan karakter
     public Button playerAButton;
@@ -22,26 +23,29 @@ public class UIMultiplayer : MonoBehaviour
     public GameObject playerBPrefab;
 
     private GameObject selectedCharacterPrefab;
+    private bool isPlayerA;
 
     private void Start()
     {
         multiplayerNama.SetActive(true);
-        // Menggunakan Inspector untuk menambahkan listener, tidak di sini
     }
 
     // Ubah metode SelectCharacter menjadi publik agar dapat diatur di Inspector
     public void SelectCharacterA()
     {
         selectedCharacterPrefab = playerAPrefab;
+        isPlayerA = true;
         Debug.Log(playerAPrefab.name + " selected as Character A");
     }
 
     public void SelectCharacterB()
     {
         selectedCharacterPrefab = playerBPrefab;
+        isPlayerA = false;
         Debug.Log(playerBPrefab.name + " selected as Character B");
     }
 
+    // Metode yang dipanggil saat tombol Start diklik
     public void OnStartButtonClicked()
     {
         string playerName = nameInputField.text;
@@ -58,11 +62,26 @@ public class UIMultiplayer : MonoBehaviour
             PlayerPrefs.SetString("SelectedCharacter", selectedCharacterPrefab.name);
             PhotonNetwork.ConnectUsingSettings();
             multiplayerNama.SetActive(false);
-            Debug.Log("Connecting to Photon with character: " + selectedCharacterPrefab.name);
         }
         else
         {
             Debug.LogError("Player name is empty");
+        }
+    }
+
+    // Metode untuk memperbarui tampilan koin berdasarkan pemain lokal
+    public void UpdateCoins()
+    {
+        int playerACoins = PlayerDataMultiplayer.Instance.playerACoins;
+        int playerBCoins = PlayerDataMultiplayer.Instance.playerBCoins;
+
+        if (isPlayerA)
+        {
+            coinsText.text = $"{playerACoins}";
+        }
+        else
+        {
+            coinsText.text = $"{playerBCoins}";
         }
     }
 
