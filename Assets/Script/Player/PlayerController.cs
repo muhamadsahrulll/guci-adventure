@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
         sprite = GetComponent<SpriteRenderer>();
         playerControl = new PlayerControl();
         photonView = GetComponent<PhotonView>();
+        rb.gravityScale = 0; // Disable gravity for 2D top-down
     }
 
     private void OnEnable()

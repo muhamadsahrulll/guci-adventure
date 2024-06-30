@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 3778645145080579605}
   - component: {fileID: 3731511923965476}
   - component: {fileID: 8088291640131489318}
+  - component: {fileID: 3223171051510019303}
   m_Layer: 0
   m_Name: playerBPrefab
   m_TagString: Player
@@ -111,8 +112,8 @@ Rigidbody2D:
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
-  m_SleepingMode: 0
-  m_CollisionDetection: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!95 &5528911694332881750
 Animator:
@@ -285,3 +286,15 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 2
     LayerIndex: 0
+--- !u!114 &3223171051510019303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5528911694332881747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b850a6bfb58526647bd272d58d03d0e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
