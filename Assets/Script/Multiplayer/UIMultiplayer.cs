@@ -13,7 +13,17 @@ public class UIMultiplayer : MonoBehaviourPunCallbacks
     public TextMeshProUGUI player1NameText;  // Referensi ke TextMeshPro untuk menampilkan nama pemain 1
     public TextMeshProUGUI player2NameText;  // Referensi ke TextMeshPro untuk menampilkan nama pemain 2
     public TextMeshProUGUI coinsText;  // Referensi ke TextMeshPro untuk menampilkan jumlah koin
+    [Header("tanam wortel")]
+    public TextMeshProUGUI timerText;  // Referensi ke TextMeshPro untuk menampilkan timer penanaman
+    public GameObject timerobjek;
+    public GameObject Wortel;
 
+    [Header("tanam jagung")]
+    public TextMeshProUGUI cornTimerText;  // Referensi ke TextMeshPro untuk menampilkan timer penanaman jagung
+    public GameObject cornTimerobjek;
+    public GameObject Corn;
+
+    [Header("Pemilihan karakter")]
     // Tambahkan referensi untuk tombol pemilihan karakter
     public Button playerAButton;
     public Button playerBButton;
@@ -25,13 +35,9 @@ public class UIMultiplayer : MonoBehaviourPunCallbacks
     private GameObject selectedCharacterPrefab;
     private bool isPlayerA;
 
-    // Tambahkan referensi untuk tombol membangun tenda
-    //public Button buildTentButton;
-
     private void Start()
     {
         multiplayerNama.SetActive(true);
-        //buildTentButton.onClick.AddListener(OnBuildTentButtonClicked);
     }
 
     // Ubah metode SelectCharacter menjadi publik agar dapat diatur di Inspector
@@ -106,9 +112,61 @@ public class UIMultiplayer : MonoBehaviourPunCallbacks
         }
     }
 
-    // Metode yang dipanggil saat tombol Build Tent diklik
-    public void OnBuildTentButtonClicked()
+    // Metode yang dipanggil saat tombol Plant Carrot diklik
+    public void OnPlantCarrotButtonClicked()
     {
-        PhotonManager.Instance.BuildTent(isPlayerA);
+        PhotonManager.Instance.PlantCarrot(isPlayerA);
+    }
+
+    // Metode yang dipanggil saat tombol Plant Corn diklik
+    public void OnPlantCornButtonClicked()
+    {
+        PhotonManager.Instance.PlantCorn(isPlayerA);
+    }
+
+    // Metode untuk memulai timer penanaman wortel
+    public void StartPlantingTimer(bool isPlayerA)
+    {
+        StartCoroutine(PlantingCoroutine(isPlayerA));
+    }
+
+    private IEnumerator PlantingCoroutine(bool isPlayerA)
+    {
+        float plantingTime = 30f; // 30 detik
+        timerobjek.SetActive(true);
+        while (plantingTime > 0)
+        {
+            timerText.text = "Menanam: " + plantingTime.ToString("F0") + "Detik";
+            yield return new WaitForSeconds(1f);
+            plantingTime--;
+        }
+        timerText.text = "";
+
+        Debug.Log("Player " + (isPlayerA ? "A" : "B") + " menanam wortel sudah selesai");
+        timerobjek.SetActive(false);
+        Wortel.SetActive(true);
+    }
+
+    // Metode untuk memulai timer penanaman jagung
+    public void StartPlantingCornTimer(bool isPlayerA)
+    {
+        StartCoroutine(PlantingCornCoroutine(isPlayerA));
+    }
+
+    private IEnumerator PlantingCornCoroutine(bool isPlayerA)
+    {
+        float plantingTime = 30f; // 30 detik
+        cornTimerobjek.SetActive(true);
+        while (plantingTime > 0)
+        {
+            cornTimerText.text = "Menanam: " + plantingTime.ToString("F0") + "Detik";
+            yield return new WaitForSeconds(1f);
+            plantingTime--;
+        }
+        cornTimerText.text = "";
+
+        Debug.Log("Player " + (isPlayerA ? "A" : "B") + " menanam jagung sudah selesai");
+        cornTimerobjek.SetActive(false);
+        Corn.SetActive(true);
     }
 }

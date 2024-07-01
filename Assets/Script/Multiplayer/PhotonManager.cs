@@ -11,6 +11,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public GameObject TendaA;
     public GameObject TendaB;
 
+
     private static PhotonManager instance;
     public static PhotonManager Instance { get { return instance; } }
 
@@ -101,6 +102,56 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         {
             StartCoroutine(tidakCukupKoin(2f));
             Debug.Log("Koin tidak cukup untuk membeli tenda");
+        }
+        uiManager.UpdateCoins();
+    }
+
+    // Metode untuk menanam wortel
+    [PunRPC]
+    public void PlantCarrot(bool isPlayerA)
+    {
+        PlayerDataMultiplayer playerData = PlayerDataMultiplayer.Instance;
+        if (isPlayerA && playerData.playerACoins >= 20)
+        {
+            playerData.AddPlayerACoins(-20);
+            Debug.Log("Player A mulai menanam wortel");
+            uiManager.StartPlantingTimer(isPlayerA);
+        }
+        else if (!isPlayerA && playerData.playerBCoins >= 20)
+        {
+            playerData.AddPlayerBCoins(-20);
+            Debug.Log("Player B mulai menanam wortel");
+            uiManager.StartPlantingTimer(isPlayerA);
+        }
+        else
+        {
+            StartCoroutine(tidakCukupKoin(2f));
+            Debug.Log("Koin tidak cukup untuk menanam wortel");
+        }
+        uiManager.UpdateCoins();
+    }
+
+    // Metode untuk menanam jagung
+    [PunRPC]
+    public void PlantCorn(bool isPlayerA)
+    {
+        PlayerDataMultiplayer playerData = PlayerDataMultiplayer.Instance;
+        if (isPlayerA && playerData.playerACoins >= 20)
+        {
+            playerData.AddPlayerACoins(-20);
+            Debug.Log("Player A mulai menanam jagung");
+            uiManager.StartPlantingCornTimer(isPlayerA);
+        }
+        else if (!isPlayerA && playerData.playerBCoins >= 20)
+        {
+            playerData.AddPlayerBCoins(-20);
+            Debug.Log("Player B mulai menanam jagung");
+            uiManager.StartPlantingCornTimer(isPlayerA);
+        }
+        else
+        {
+            StartCoroutine(tidakCukupKoin(2f));
+            Debug.Log("Koin tidak cukup untuk menanam jagung");
         }
         uiManager.UpdateCoins();
     }
