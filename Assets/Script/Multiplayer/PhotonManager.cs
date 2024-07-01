@@ -7,6 +7,9 @@ using Photon.Realtime;
 public class PhotonManager : MonoBehaviourPunCallbacks
 {
     public UIMultiplayer uiManager;
+    public GameObject tidakcukup;
+    public GameObject TendaA;
+    public GameObject TendaB;
 
     private static PhotonManager instance;
     public static PhotonManager Instance { get { return instance; } }
@@ -75,5 +78,37 @@ public class PhotonManager : MonoBehaviourPunCallbacks
             playerData.AddPlayerBCoins(amount);
         }
         uiManager.UpdateCoins();
+    }
+
+    // Metode untuk membangun tenda
+    [PunRPC]
+    public void BuildTent(bool isPlayerA)
+    {
+        PlayerDataMultiplayer playerData = PlayerDataMultiplayer.Instance;
+        if (isPlayerA && playerData.playerACoins >= 20)
+        {
+            TendaA.SetActive(true);
+            playerData.AddPlayerACoins(-20);
+            Debug.Log("Player A sudah membeli tenda");
+        }
+        else if (!isPlayerA && playerData.playerBCoins >= 20)
+        {
+            TendaB.SetActive(true);
+            playerData.AddPlayerBCoins(-20);
+            Debug.Log("Player B sudah membeli tenda");
+        }
+        else
+        {
+            StartCoroutine(tidakCukupKoin(2f));
+            Debug.Log("Koin tidak cukup untuk membeli tenda");
+        }
+        uiManager.UpdateCoins();
+    }
+
+    IEnumerator tidakCukupKoin(float seconds)
+    {
+        tidakcukup.gameObject.SetActive(true);
+        yield return new WaitForSeconds(seconds);
+        tidakcukup.gameObject.SetActive(false);
     }
 }

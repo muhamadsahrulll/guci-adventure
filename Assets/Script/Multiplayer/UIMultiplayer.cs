@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using Photon.Pun;
 using TMPro;
 
-public class UIMultiplayer : MonoBehaviour
+public class UIMultiplayer : MonoBehaviourPunCallbacks
 {
     public TMP_InputField nameInputField;
     public Button startButton;
@@ -25,9 +25,13 @@ public class UIMultiplayer : MonoBehaviour
     private GameObject selectedCharacterPrefab;
     private bool isPlayerA;
 
+    // Tambahkan referensi untuk tombol membangun tenda
+    //public Button buildTentButton;
+
     private void Start()
     {
         multiplayerNama.SetActive(true);
+        //buildTentButton.onClick.AddListener(OnBuildTentButtonClicked);
     }
 
     // Ubah metode SelectCharacter menjadi publik agar dapat diatur di Inspector
@@ -100,5 +104,11 @@ public class UIMultiplayer : MonoBehaviour
         {
             player2NameText.text = "Player 2: " + players[1].NickName;
         }
+    }
+
+    // Metode yang dipanggil saat tombol Build Tent diklik
+    public void OnBuildTentButtonClicked()
+    {
+        PhotonManager.Instance.BuildTent(isPlayerA);
     }
 }

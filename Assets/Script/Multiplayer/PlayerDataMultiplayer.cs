@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Player Data Multiplayer", menuName = "Game/Player Data Multiplayer")]
 public class PlayerDataMultiplayer : ScriptableObject
 {
-    
     public int playerACoins; // Koin untuk Player A
     public int playerBCoins; // Koin untuk Player B
 
