@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour, IPunObservable
     private PlayerControl playerControl;
 
     private bool facingLeft = false;
-    private PhotonView photonView;
+    public PhotonView photonView;
 
     private void Awake()
     {

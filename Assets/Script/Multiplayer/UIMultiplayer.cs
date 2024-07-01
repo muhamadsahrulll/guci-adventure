@@ -23,6 +23,12 @@ public class UIMultiplayer : MonoBehaviourPunCallbacks
     public GameObject cornTimerobjek;
     public GameObject Corn;
 
+    [Header("Berendam")]
+    public TextMeshProUGUI bathTimerText;  // Referensi ke TextMeshPro untuk menampilkan timer berendam
+    public GameObject bathTimerObjek;
+    public GameObject playerABathObjek;
+    public GameObject playerBBathObjek;
+
     [Header("Pemilihan karakter")]
     // Tambahkan referensi untuk tombol pemilihan karakter
     public Button playerAButton;
@@ -34,6 +40,8 @@ public class UIMultiplayer : MonoBehaviourPunCallbacks
 
     private GameObject selectedCharacterPrefab;
     private bool isPlayerA;
+
+    private GameObject playerInstance;
 
     private void Start()
     {
@@ -168,5 +176,81 @@ public class UIMultiplayer : MonoBehaviourPunCallbacks
         Debug.Log("Player " + (isPlayerA ? "A" : "B") + " menanam jagung sudah selesai");
         cornTimerobjek.SetActive(false);
         Corn.SetActive(true);
+    }
+
+    // Metode yang dipanggil saat tombol Berendam diklik
+    public void OnBathButtonClicked()
+    {
+        PhotonManager.Instance.StartBath(isPlayerA);
+    }
+
+    // Metode untuk memulai timer berendam
+    public void StartBathTimer(bool isPlayerA)
+    {
+        FindPlayerInstance(isPlayerA);
+        StartCoroutine(BathCoroutine(isPlayerA));
+    }
+
+    private void FindPlayerInstance(bool isPlayerA)
+    {
+        foreach (var player in FindObjectsOfType<PlayerController>())
+        {
+            if (player.photonView.IsMine && isPlayerA)
+            {
+                playerInstance = player.gameObject;
+                return;
+            }
+            else if (!player.photonView.IsMine && !isPlayerA)
+            {
+                playerInstance = player.gameObject;
+                return;
+            }
+        }
+    }
+
+    private IEnumerator BathCoroutine(bool isPlayerA)
+    {
+        float bathTime = 30f; // 30 detik
+        bathTimerObjek.SetActive(true);
+
+        if (playerInstance != null)
+        {
+            playerInstance.SetActive(false);
+        }
+
+        if (isPlayerA)
+        {
+            playerABathObjek.SetActive(true);
+        }
+        else
+        {
+            playerBBathObjek.SetActive(true);
+        }
+
+        while (bathTime > 0)
+        {
+            bathTimerText.text = "Berendam: " + bathTime.ToString("F0") + " Detik";
+            yield return new WaitForSeconds(1f);
+            bathTime--;
+        }
+
+        bathTimerText.text = "";
+        bathTimerObjek.SetActive(false);
+
+        if (isPlayerA)
+        {
+            playerABathObjek.SetActive(false);
+        }
+        else
+        {
+            playerBBathObjek.SetActive(false);
+        }
+
+        if (playerInstance != null)
+        {
+            playerInstance.SetActive(true);
+        }
+
+        Debug.Log("Player " + (isPlayerA ? "A" : "B") + " selesai berendam");
     }
 }

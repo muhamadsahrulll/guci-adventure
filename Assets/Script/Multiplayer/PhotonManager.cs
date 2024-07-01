@@ -162,4 +162,30 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         yield return new WaitForSeconds(seconds);
         tidakcukup.gameObject.SetActive(false);
     }
+
+    [PunRPC]
+    public void StartBath(bool isPlayerA)
+    {
+        PlayerDataMultiplayer playerData = PlayerDataMultiplayer.Instance;
+        if (isPlayerA && playerData.playerACoins >= 20)
+        {
+            playerData.AddPlayerACoins(-20);
+            Debug.Log("Player A mulai berendam");
+            uiManager.playerAPrefab.SetActive(false);
+            uiManager.StartBathTimer(isPlayerA);
+        }
+        else if (!isPlayerA && playerData.playerBCoins >= 20)
+        {
+            playerData.AddPlayerBCoins(-20);
+            Debug.Log("Player B mulai berendam");
+            uiManager.playerBPrefab.SetActive(false);
+            uiManager.StartBathTimer(isPlayerA);
+        }
+        else
+        {
+            StartCoroutine(tidakCukupKoin(2f));
+            Debug.Log("Koin tidak cukup untuk berendam");
+        }
+        uiManager.UpdateCoins();
+    }
 }
