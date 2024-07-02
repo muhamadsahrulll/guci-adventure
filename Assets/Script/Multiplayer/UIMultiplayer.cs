@@ -253,4 +253,9 @@ public class UIMultiplayer : MonoBehaviourPunCallbacks
 
         Debug.Log("Player " + (isPlayerA ? "A" : "B") + " selesai berendam");
     }
+
+    public void OnBuildTentButtonClicked()
+    {
+        PhotonManager.Instance.BuildTent(isPlayerA);
+    }
 }
